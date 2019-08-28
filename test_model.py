@@ -17,32 +17,26 @@ def main():
 
     correct = 0
     total = 0
-    for i, (images, labels) in enumerate(test_dataloader):
-        image = images
+    for i, (image, label) in enumerate(test_dataloader):
         vimage = Variable(image)
         if torch.cuda.is_available():
-            vimage = images.cuda()
+            vimage = vimage.cuda()
         output = cnn(vimage)
         predict_label = ""
         for j in range(4):
             predict_label += config.CHAR_SET[
                 np.argmax(output[0, j * config.CHAR_SET_LEN:(j + 1) * config.CHAR_SET_LEN].data.cpu().numpy())
             ]
-        true_label = one_hot.one_hot_decode(labels.numpy()[0])
-        total += labels.size(0)
+        true_label = one_hot.vec2text(label.numpy()[0])
+        total += label.size(0)
+
         if predict_label == true_label:
             correct += 1
-        if total % 200 == 0:
+        if total % 100 == 0:
             print('Test Accuracy of the model on the %d test images: %f %%' % (total, 100 * correct / total))
     print('Test Accuracy of the model on the %d test images: %f %%' % (total, 100 * correct / total))
 
 
 if __name__ == '__main__':
     main()
-# model1:
-#       train: 30.300000 %
-#       test: 10.100000 %
-# model2:
-#       train: 100.000000 %
-#       test: 61.700000 %
-# 过拟合
+

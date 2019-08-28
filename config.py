@@ -12,9 +12,9 @@ CAPTCHA_LEN = 4  # 验证码长度
 IMAGE_HEIGHT = 60
 IMAGE_WIDTH = 160
 
-TRAIN_COUNT = 10000  # 生成训练集数量
+TRAIN_COUNT = 100000  # 生成训练集数量
 TEST_COUNT = 1000  # 生成测试集数量
 
 TRAIN_DATASET_PATH = "dataset" + os.path.sep + "train"
 TEST_DATASET_PATH = "dataset" + os.path.sep + "test"
-PREDICT_DATA_PATH = "dataset" + os.path.sep + "predict"
+PREDICT_DATASET_PATH = "dataset" + os.path.sep + "predict"

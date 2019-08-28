@@ -5,7 +5,7 @@ import config
 def char2pos(ch):
     """
     把字符转换成one-hot的位置
-    :param ch: 字符,大写字母或数字
+    :param ch: 大写字母或数字
     :return:
         pos:位置
     """
@@ -18,7 +18,7 @@ def char2pos(ch):
     return pos
 
 
-def one_hot_encode(text):
+def text2vec(text):
     """
     把验证码进行one-hot编码
     :param text: 验证码
@@ -32,30 +32,24 @@ def one_hot_encode(text):
     return vector
 
 
-def one_hot_decode(vector):
+def vec2text(vector):
     """
     把one_hot解码成字符
     :param vector: 验证码的one—hot形式
     :return:
-        text:验证码
+        text:验证码的string形式
     """
     char_pos = vector.nonzero()[0]
     text = []
     for i, char_idx in enumerate(char_pos):
         char_idx %= config.CHAR_SET_LEN
-        if char_idx < 10:
-            char_code = char_idx + ord('0')
-        elif char_idx < 36:
-            char_code = char_idx - 10 + ord('A')
-        else:
-            raise ValueError('Vector is wrong')
-        text.append(chr(char_code))
+        text.append(config.CHAR_SET[char_idx])
     return ''.join(text)
 
 
 if __name__ == '__main__':
     s = 'A6S2'
-    vec = one_hot_encode(s)
+    vec = text2vec(s)
     print(vec.reshape(4, -1))
-    res = one_hot_decode(vec)
+    res = vec2text(vec)
     print(res)

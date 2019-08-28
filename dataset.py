@@ -34,7 +34,7 @@ class MyDataset(Dataset):
         image = Image.open(image_root)
         if self.transform is not None:
             image = self.transform(image)
-        label = one_hot.one_hot_encode(image_name.split('_')[0])
+        label = one_hot.text2vec(image_name.split('_')[0])
         return image, label
 
 
@@ -54,9 +54,9 @@ def get_test_data_loader():
     return DataLoader(dataset, batch_size=1, shuffle=False)
 
 
-# def get_predict_data_loader():
-#     dataset = MyDataset(config.PREDICT_DATASET_PATH, transform=transform)
-#     return DataLoader(dataset, batch_size=1, shuffle=True)
+def get_predict_data_loader():
+    dataset = MyDataset(config.PREDICT_DATASET_PATH, transform=transform)
+    return DataLoader(dataset, batch_size=1, shuffle=True)
 
 """
 通过继承torch.utils.data.Dataset的这个抽象类，我们可以定义好我们需要的数据类

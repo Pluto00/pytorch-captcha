@@ -11,9 +11,11 @@
 CNN网络有五层的卷积层加上两层的全连接层构成。
 
 # 使用说明
-- 首先配置config文件，设置验证码的长度和字符以及训练集和测试集的数量，然后运行 image_gen.py 文件生成数据集
+- 首先配置 config 文件，设置验证码的长度和字符以及训练集和测试集的数量，然后运行 image_gen.py 文件生成数据集
 - 然后运行 train_model.py 文件即可开始训练模型
 - 运行 test_model.py 文件可以测试模型的正确率
 
 # 模型缺陷
-对于字母O和数字0难以区分，其他的字符都能较好的识别
+对于字母O和数字0难以区分，比如下图**0O1O**，人眼也几乎无法区分
+
+![captcha](https://github.com/Pluto00/pytorch-captcha/blob/master/dataset/train/0O1O_1566976470.png?raw=true)

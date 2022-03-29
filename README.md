@@ -19,3 +19,5 @@ CNN网络有五层的卷积层加上两层的全连接层构成。
 对于字母O和数字0难以区分，比如下图**0O1O**，人眼也几乎无法区分
 
 ![captcha](https://github.com/Pluto00/pytorch-captcha/blob/master/dataset/train/0O1O_1566976470.png?raw=true)
+
+//更新
